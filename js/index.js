@@ -1,3 +1,28 @@
+var imgArr=new Array();
+localStorage.setItem('imArray',JSON.stringify(imgArr));
+ 
+ window.addEventListener('load', likeImg);
+
+ function likeImg()
+ {
+
+   // existing = existing ? existing.split(',') : [];
+   // console.log(existing);
+   // var storedNames = JSON.parse(localStorage.getItem('imArray'));
+    //console.log(storedNames[0]);
+    // for(var i=0;i<existing.length;i++)
+    // {
+    //    let k=existing[i];
+       
+    //     var element=document.getElementById(k);
+    //     element.style.color="red";
+    // }
+    var existing = localStorage.getItem('imArray');
+    existing = existing.split(',');
+    console.log(existing)
+
+}
+
 
 function Search() {
    // document.getElementById("image").innerHTML = "";
@@ -10,9 +35,39 @@ function Search() {
             return response.json();
         })
         .then(data => {
-               
+            //let index=0;
                 data.results.forEach(photo=>{
-                    let result=`<img src="${photo.urls.regular}">`;
+                    //index++;
+                    //console.log(photo.id);
+                    let result=`
+                <div id="imdiv">
+                    <div class="imdis">
+                        <img src="${photo.urls.regular}" id="myImg" alt="photo">
+                       
+                        <span><i id="searchbtn" class="fa fa-search-plus" aria-hidden="true" data-src="${photo.urls.regular}" onClick="zoom(this)"></i></span>
+                    </div>
+                   
+                    <div>
+                             <i value="test" id="${photo.id}" class="fa fa-heart-o button2" aria-hidden="true" onClick="changeColor(this)"></i> 
+                    </div>
+                    
+                </div>
+                <div id="myModal" class="modal">
+
+                    <!-- The Close Button -->
+                    <span class="close" onClick="cg()">&times;</span>
+
+                    <!-- Modal Content (The Image) -->
+                    <img class="modal-content" id="img01" onClick="cg()">
+
+                    <!-- Modal Caption (Image Text) -->
+                    <div id="caption"></div>
+                </div>
+                   
+
+  
+`
+                    ;
                    $(".image").append(result)
                 })
             });
@@ -20,4 +75,94 @@ function Search() {
 
 function Clear(){
     $('.image').empty();
+}
+
+
+
+function  changeColor(b1)
+{
+   let k=b1.id;
+   var element=document.getElementById(k);
+    if(imgArr.includes(k))
+    {
+       element.style.color="black";
+       var index = imgArr.indexOf(k);
+        if (index > -1) 
+        {
+            imgArr.splice(index, 1);
+            var x = localStorage.getItem('imArray');
+            deleteFromLocalStorageArray(x,index);
+        }
+    }
+    else{
+    
+        element.style.color="red";
+        imgArr.push(k);
+        var x = localStorage.getItem('imArray');
+        addToLocalStorageArray(x,k);
+
+    }
+   
+}
+
+
+function cg() {
+    console.log("abc");
+   document.getElementById("myModal").style.display = "none";
+}
+
+
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+var modal = document.getElementById("myModal");
+function zoom(k)
+{
+    var x = k.getAttribute("data-src"); 
+    document.getElementById("myModal").style.display = "block";
+    document.getElementById("img01").src = x;
+  
+  //captionText.innerHTML = this.alt;
+}
+
+// function zoom2(k)
+// {
+//     document.getElementById("myModal").style.display = "block";
+//     document.getElementById("img01").src = k.src;
+//     return k.src; 
+// }
+var addToLocalStorageArray = function (imArray, value) {
+
+    // Get the existing data
+    
+
+    
+	var existing = localStorage.getItem(imArray);
+   
+	// If no existing data, create an array
+	// Otherwise, convert the localStorage string to an array
+	existing = existing ? existing.split(',') : [];
+
+	// Add new data to localStorage Array
+	existing.push(value);
+
+	// Save back to localStorage
+	localStorage.setItem(imArray, existing.toString());
+
+};
+
+var deleteFromLocalStorageArray = function(imArray,index)
+{
+    var existing = localStorage.getItem(imArray);
+    existing = existing ? existing.split(',') : [];
+    if (index > -1) 
+    {
+        existing.splice(index, 1);
+        localStorage.setItem(imArray,existing.toString());
+    }
+
+
 }
