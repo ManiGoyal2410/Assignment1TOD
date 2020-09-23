@@ -1,5 +1,8 @@
 var imgArr=new Array();
-localStorage.setItem('imArray',JSON.stringify(imgArr));
+if(!localStorage.getItem('imArray')){
+    $window.localStorage.setItem('imArray', JSON.stringify(imgArr));
+}
+localStorage.setItem('',JSON.stringify(imgArr));
  
  window.addEventListener('load', likeImg);
 
@@ -19,9 +22,24 @@ localStorage.setItem('imArray',JSON.stringify(imgArr));
     // }
     var existing = localStorage.getItem('imArray');
     existing = existing.split(',');
+    
     console.log(existing)
+    console.log(existing[0].toString());
+    //var element=document.getElementById((existing[10].toString()));
+    //console.log(element);
+    var k=existing[12].toString();
+    // let form = document.querySelector(`#${k}`); 
+    // console.log(form);
+    console.log(k);
+    
 
 }
+// var existing = localStorage.getItem('imArray');
+// existing = existing.split(',');
+// var k=existing[13].toString();
+//     let form = document.querySelector(`#${k}`); 
+//     console.log(form);
+//     console.log(k);
 
 
 function Search() {
@@ -48,35 +66,73 @@ function Search() {
                     </div>
                    
                     <div>
-                             <i value="test" id="${photo.id}" class="fa fa-heart-o button2" aria-hidden="true" onClick="changeColor(this)"></i> 
+                             <i value="test" data-id="${photo.id}" id="${photo.id}" class="fa fa-heart-o button2" aria-hidden="true" onClick="changeColor(this)"></i> 
                     </div>
                     
                 </div>
                 <div id="myModal" class="modal">
-
                     <!-- The Close Button -->
                     <span class="close" onClick="cg()">&times;</span>
-
                     <!-- Modal Content (The Image) -->
                     <img class="modal-content" id="img01" onClick="cg()">
-
                     <!-- Modal Caption (Image Text) -->
                     <div id="caption"></div>
                 </div>
                    
-
   
 `
                     ;
                    $(".image").append(result)
                 })
             });
+            // var existing = localStorage.getItem('imArray');
+            // existing = existing.split(',');
+            // var k=existing[13].toString();
+            //     let form = document.getElementById(existing[13]); 
+            //    console.log(form);
+            //    console.log(k);
+            // var existing = localStorage.getItem('imArray');
+            // existing = existing.split(',');
+            
+            // existing.forEach(function(id) {
+            //   $('.button2[data-id=' + id + ']').attr('favorite', '');
+            // });
+            var existing = localStorage.getItem('imArray');
+                 existing = existing.split(',');
+                 for(var i=0;i<existing.length;i++)
+                 {
+                     let k=existing[i];
+                     var z=k.toString();
+                   // console.log(k);
+                   // console.log(z);
+                   var t= document.getElementById(z);
+                   if(t!=null){ 
+                    t.style.color="red";
+                    console.log(t);   
+                  }
+                  
+                  }
+
 }
+
+
+// $(document).ready(function(){
+//     var existing = localStorage.getItem('imArray');
+//     existing = existing.split(',');
+//     for(var i=0;i<existing.length;i++)
+//     {
+//         let k=existing[i];
+//         var z=k.toString();
+//       // console.log(k);
+//        console.log(z);
+//       var t= document.getElementById(z);
+//       t.style.color="red";
+//      }
+// })
 
 function Clear(){
     $('.image').empty();
 }
-
 
 
 function  changeColor(b1)
@@ -140,7 +196,7 @@ var addToLocalStorageArray = function (imArray, value) {
     
 
     
-	var existing = localStorage.getItem(imArray);
+	var existing = localStorage.getItem('imArray');
    
 	// If no existing data, create an array
 	// Otherwise, convert the localStorage string to an array
@@ -150,18 +206,18 @@ var addToLocalStorageArray = function (imArray, value) {
 	existing.push(value);
 
 	// Save back to localStorage
-	localStorage.setItem(imArray, existing.toString());
+	localStorage.setItem('imArray', existing.toString());
 
 };
 
 var deleteFromLocalStorageArray = function(imArray,index)
 {
-    var existing = localStorage.getItem(imArray);
+    var existing = localStorage.getItem('imArray');
     existing = existing ? existing.split(',') : [];
     if (index > -1) 
     {
         existing.splice(index, 1);
-        localStorage.setItem(imArray,existing.toString());
+        localStorage.setItem('imArray',existing.toString());
     }
 
 

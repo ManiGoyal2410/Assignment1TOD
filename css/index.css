@@ -160,3 +160,7 @@
     width: 100%;
   }
 }
+
+.button2[favorite] {
+  color:red;
+}
