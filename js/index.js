@@ -1,39 +1,39 @@
 var imgArr=new Array();
 if(!localStorage.getItem('imArray')){
-    $window.localStorage.setItem('imArray', JSON.stringify(imgArr));
+    window.localStorage.setItem('imArray', JSON.stringify(imgArr));
 }
 localStorage.setItem('',JSON.stringify(imgArr));
  
- window.addEventListener('load', likeImg);
+//  window.addEventListener('load', likeImg);
 
- function likeImg()
- {
+//  function likeImg()
+//  {
 
-   // existing = existing ? existing.split(',') : [];
-   // console.log(existing);
-   // var storedNames = JSON.parse(localStorage.getItem('imArray'));
-    //console.log(storedNames[0]);
-    // for(var i=0;i<existing.length;i++)
-    // {
-    //    let k=existing[i];
+//    // existing = existing ? existing.split(',') : [];
+//    // console.log(existing);
+//    // var storedNames = JSON.parse(localStorage.getItem('imArray'));
+//     //console.log(storedNames[0]);
+//     // for(var i=0;i<existing.length;i++)
+//     // {
+//     //    let k=existing[i];
        
-    //     var element=document.getElementById(k);
-    //     element.style.color="red";
-    // }
-    var existing = localStorage.getItem('imArray');
-    existing = existing.split(',');
+//     //     var element=document.getElementById(k);
+//     //     element.style.color="red";
+//     // }
+//     var existing = localStorage.getItem('imArray');
+//     existing = existing.split(',');
     
-    console.log(existing)
-    console.log(existing[0].toString());
-    //var element=document.getElementById((existing[10].toString()));
-    //console.log(element);
-    var k=existing[12].toString();
-    // let form = document.querySelector(`#${k}`); 
-    // console.log(form);
-    console.log(k);
+//     console.log(existing)
+//     console.log(existing[0].toString());
+//     //var element=document.getElementById((existing[10].toString()));
+//     //console.log(element);
+//     var k=existing[12].toString();
+//     // let form = document.querySelector(`#${k}`); 
+//     // console.log(form);
+//     console.log(k);
     
 
-}
+// }
 // var existing = localStorage.getItem('imArray');
 // existing = existing.split(',');
 // var k=existing[13].toString();
@@ -103,8 +103,8 @@ function Search() {
                  {
                      let k=existing[i];
                      var z=k.toString();
-                   // console.log(k);
-                   // console.log(z);
+                    console.log(k);
+                    console.log(z);
                    var t= document.getElementById(z);
                    if(t!=null){ 
                     t.style.color="red";
@@ -139,24 +139,26 @@ function  changeColor(b1)
 {
    let k=b1.id;
    var element=document.getElementById(k);
-    if(imgArr.includes(k))
+   var existing = localStorage.getItem('imArray');
+   existing = existing ? existing.split(',') : [];
+    if(existing.includes(k))
     {
        element.style.color="black";
-       var index = imgArr.indexOf(k);
+       var index = existing.indexOf(k);
         if (index > -1) 
         {
-            imgArr.splice(index, 1);
+            existing.splice(index, 1);
             var x = localStorage.getItem('imArray');
-            deleteFromLocalStorageArray(x,index);
+            localStorage.setItem('imArray',existing.toString());
         }
     }
     else{
     
         element.style.color="red";
-        imgArr.push(k);
+        existing.push(k);
         var x = localStorage.getItem('imArray');
-        addToLocalStorageArray(x,k);
-
+       // addToLocalStorageArray(x,k);
+        localStorage.setItem('imArray', existing.toString());
     }
    
 }
@@ -190,35 +192,35 @@ function zoom(k)
 //     document.getElementById("img01").src = k.src;
 //     return k.src; 
 // }
-var addToLocalStorageArray = function (imArray, value) {
+// var addToLocalStorageArray = function (imArray, value) {
 
-    // Get the existing data
+//     // Get the existing data
     
 
     
-	var existing = localStorage.getItem('imArray');
+// 	var existing = localStorage.getItem('imArray');
    
-	// If no existing data, create an array
-	// Otherwise, convert the localStorage string to an array
-	existing = existing ? existing.split(',') : [];
+// 	// If no existing data, create an array
+// 	// Otherwise, convert the localStorage string to an array
+// 	existing = existing ? existing.split(',') : [];
 
-	// Add new data to localStorage Array
-	existing.push(value);
+// 	// Add new data to localStorage Array
+// 	existing.push(value);
 
-	// Save back to localStorage
-	localStorage.setItem('imArray', existing.toString());
+// 	// Save back to localStorage
+// 	localStorage.setItem('imArray', existing.toString());
 
-};
+// };
 
-var deleteFromLocalStorageArray = function(imArray,index)
-{
-    var existing = localStorage.getItem('imArray');
-    existing = existing ? existing.split(',') : [];
-    if (index > -1) 
-    {
-        existing.splice(index, 1);
-        localStorage.setItem('imArray',existing.toString());
-    }
+// var deleteFromLocalStorageArray = function(imArray,index)
+// {
+//     var existing = localStorage.getItem('imArray');
+//     existing = existing ? existing.split(',') : [];
+//     if (index > -1) 
+//     {
+//         existing.splice(index, 1);
+//         localStorage.setItem('imArray',existing.toString());
+//     }
 
 
-}
+// }
