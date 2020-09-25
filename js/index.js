@@ -82,7 +82,23 @@ function Search() {
   
 `
                     ;
-                   $(".image").append(result)
+                   $(".image").append(result);
+                   var existing = localStorage.getItem('imArray');
+                   existing = existing.split(',');
+                   for(var i=0;i<existing.length;i++)
+                   {
+                       let k=existing[i];
+                       var z=k.toString();
+                     // console.log(k);
+                      console.log(z);
+                     var t= document.getElementById(z);
+                     if(t!=null){ 
+                      t.style.color="red";
+                      console.log(t);   
+                    }
+                    
+                    }
+
                 })
             });
             // var existing = localStorage.getItem('imArray');
@@ -97,24 +113,41 @@ function Search() {
             // existing.forEach(function(id) {
             //   $('.button2[data-id=' + id + ']').attr('favorite', '');
             // });
-            var existing = localStorage.getItem('imArray');
-                 existing = existing.split(',');
-                 for(var i=0;i<existing.length;i++)
-                 {
-                     let k=existing[i];
-                     var z=k.toString();
-                    console.log(k);
-                    console.log(z);
-                   var t= document.getElementById(z);
-                   if(t!=null){ 
-                    t.style.color="red";
-                    console.log(t);   
-                  }
+            // var existing = localStorage.getItem('imArray');
+            //      existing = existing.split(',');
+            //      for(var i=0;i<existing.length;i++)
+            //      {
+            //          let k=existing[i];
+            //          var z=k.toString();
+            //        // console.log(k);
+            //         console.log(z);
+            //        var t= document.getElementById(z);
+            //        if(t!=null){ 
+            //         t.style.color="red";
+            //         console.log(t);   
+            //       }
                   
-                  }
+            //       }
 
 }
-
+// function likeImage()
+// {
+//     var existing = localStorage.getItem('imArray');
+//                  existing = existing.split(',');
+//                  for(var i=0;i<existing.length;i++)
+//                  {
+//                      let k=existing[i];
+//                      var z=k.toString();
+//                     console.log(k);
+//                     console.log(z);
+//                    var t= document.getElementById(z);
+//                    if(t!=null){ 
+//                     t.style.color="red";
+//                     console.log(t);   
+//                   }
+                  
+//                   }
+// }
 
 // $(document).ready(function(){
 //     var existing = localStorage.getItem('imArray');
