@@ -83,7 +83,10 @@ function Search() {
 `
                     ;
                    $(".image").append(result);
-                   var existing = localStorage.getItem('imArray');
+                   
+
+                })
+                var existing = localStorage.getItem('imArray');
                    existing = existing.split(',');
                    for(var i=0;i<existing.length;i++)
                    {
@@ -98,8 +101,6 @@ function Search() {
                     }
                     
                     }
-
-                })
             });
             // var existing = localStorage.getItem('imArray');
             // existing = existing.split(',');
